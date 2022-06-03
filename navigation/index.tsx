@@ -15,6 +15,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
+import TabThreeScreen from '../screens/TabThreeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -66,8 +67,8 @@ function BottomTabNavigator() {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Books',
+          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -88,8 +89,16 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Readers',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-o" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="TabThree"
+        component={TabThreeScreen}
+        options={{
+          title: 'Activity',
+          tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />,
         }}
       />
     </BottomTab.Navigator>
