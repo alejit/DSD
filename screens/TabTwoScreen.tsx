@@ -1,71 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Image } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { FlatList, SafeAreaView, StyleSheet, Image } from "react-native";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import EditScreenInfo from "../components/EditScreenInfo";
+import { Text, View } from "../components/Themed";
+import { RootTabScreenProps } from "../types";
 
-export default function TabTwoScreen({ navigation }: RootTabScreenProps<'TabThree'>) {
+export default function TabTwoScreen({
+  navigation,
+}: RootTabScreenProps<"TabThree">) {
   let get = {
-    method: 'GET',
+    method: "GET",
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
-    }
-}
-  const [Data, setData] = useState([])
-  const API = 'http://192.168.0.101:8080/ords/remoteda/cititor';
+      Accept: "application/json",
+      "Content-Type": "application/json; charset=utf-8",
+    },
+  };
+  const [Data, setData] = useState([]);
+  const API = "http://192.168.0.101:8080/ords/global_modbd/cititor";
   const fetchGet = () => {
-  fetch(API, get)
+    fetch(API, get)
       .then((res) => res.json())
       .then((res) => {
-          setData(res);
+        setData(res);
       })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
   useEffect(() => {
-    fetchGet()
+    fetchGet();
   }, []);
 
   const renderItem = ({ item: cititor }) => (
-      <View style={styles.container}>
-      <Text style={styles.title}>{cititor.nume} {cititor.prenume}</Text>
-      <Image source={{width:200, height:300, uri: "https://picsum.photos/id/1010/200/300"}}/>
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        {cititor.nume} {cititor.prenume}
+      </Text>
+      <Image
+        source={{
+          width: 200,
+          height: 300,
+          uri: "https://picsum.photos/id/1010/200/300",
+        }}
+      />
       <Text style={styles.stitle}>Cod:{cititor.cod_cititor}</Text>
       <Text style={styles.stitle}>Legitimatie:{cititor.serie_legitimatie}</Text>
       {/* <Text style={styles.subtitle}>Localitate:{cititor.localitate} Email:{cititor.email}</Text> */}
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
       <EditScreenInfo path="/screens/TabOneScreen.tsx" />
     </View>
   );
 
-return(
-  <SafeAreaView>
+  return (
+    <SafeAreaView>
       <FlatList
-          data={Data}
-          renderItem={renderItem}
-          keyExtractor={Data => Data.cod_cititor}
+        data={Data}
+        renderItem={renderItem}
+        keyExtractor={(Data) => Data.cod_cititor}
       />
-  </SafeAreaView>
+    </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   stitle: {
     fontSize: 10,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   subtitle: {
     fontSize: 10,
@@ -73,6 +86,6 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
   },
 });
