@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Image } from "react-native";
+import { Swipeable } from "react-native-gesture-handler";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
+import { renderRightActions } from "./SwipeUtils";
 
 export default function ReadersScreen({
   navigation,
@@ -32,27 +34,31 @@ export default function ReadersScreen({
   }, []);
 
   const renderItem = ({ item: cititor }) => (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        {cititor.nume} {cititor.prenume}
-      </Text>
-      <Image
-        source={{
-          width: 200,
-          height: 300,
-          uri: "https://picsum.photos/id/1010/200/300",
-        }}
-      />
-      <Text style={styles.stitle}>Cod:{cititor.cod_cititor}</Text>
-      <Text style={styles.stitle}>Legitimatie:{cititor.serie_legitimatie}</Text>
-      {/* <Text style={styles.subtitle}>Localitate:{cititor.localitate} Email:{cititor.email}</Text> */}
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="/screens/BooksScreen.tsx" />
-    </View>
+    <Swipeable renderRightActions={renderRightActions}>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          {cititor.nume} {cititor.prenume}
+        </Text>
+        <Image
+          source={{
+            width: 200,
+            height: 300,
+            uri: "https://picsum.photos/id/1010/200/300",
+          }}
+        />
+        <Text style={styles.stitle}>Cod:{cititor.cod_cititor}</Text>
+        <Text style={styles.stitle}>
+          Legitimatie:{cititor.serie_legitimatie}
+        </Text>
+        {/* <Text style={styles.subtitle}>Localitate:{cititor.localitate} Email:{cititor.email}</Text> */}
+        <View
+          style={styles.separator}
+          lightColor="#eee"
+          darkColor="rgba(255,255,255,0.1)"
+        />
+        <EditScreenInfo path="/screens/BooksScreen.tsx" />
+      </View>
+    </Swipeable>
   );
 
   return (
