@@ -5,7 +5,7 @@ import { Swipeable } from "react-native-gesture-handler";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
-import { renderRightActions } from "./SwipeUtils";
+import { ReaderRightActions } from "./SwipeUtils";
 
 export default function ReadersScreen({
   navigation,
@@ -18,7 +18,7 @@ export default function ReadersScreen({
     },
   };
   const [Data, setData] = useState([]);
-  const API = "http://192.168.0.101:8080/ords/global_modbd/cititor";
+  const API = "http://192.168.100.30:8080/ords/global_modbd/cititor";
   const fetchGet = () => {
     fetch(API, get)
       .then((res) => res.json())
@@ -34,7 +34,7 @@ export default function ReadersScreen({
   }, []);
 
   const renderItem = ({ item: cititor }) => (
-    <Swipeable renderRightActions={renderRightActions}>
+    <Swipeable renderRightActions={ReaderRightActions}>
       <View style={styles.container}>
         <Text style={styles.title}>
           {cititor.nume} {cititor.prenume}

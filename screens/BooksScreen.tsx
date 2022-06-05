@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Image,
-  Animated,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Image } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
-import { renderRightActions } from "./SwipeUtils";
+import { BookRightActions } from "./SwipeUtils";
 
 export default function BooksScreen({
   navigation,
@@ -25,7 +18,7 @@ export default function BooksScreen({
     },
   };
   const [Data, setData] = useState([]);
-  const API = "http://192.168.0.101:8080/ords/global_modbd/carte";
+  const API = "http://192.168.100.30:8080/ords/global_modbd/carte";
   const fetchGet = () => {
     fetch(API, header)
       .then((res) => res.json())
@@ -41,7 +34,7 @@ export default function BooksScreen({
   }, []);
 
   const renderItem = ({ item: carte }) => (
-    <Swipeable renderRightActions={renderRightActions}>
+    <Swipeable renderRightActions={BookRightActions}>
       <View style={styles.container}>
         <Text style={styles.title}>{carte.titlu}</Text>
         <Image

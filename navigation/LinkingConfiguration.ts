@@ -17,17 +17,25 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Books: {
             screens: {
-              BooksScreen: 'one',
+              BooksScreen: 'books',
             },
           },
           Readers: {
             screens: {
-              ReadersScreen: 'two',
+              ReadersScreen: 'readers',
+            },
+          },
+          Activity: {
+            screens: {
+              ReadersScreen: 'activity',
             },
           },
         },
       },
       Modal: 'modal',
+      BookModal: 'modal',
+      ActivityModal: 'modal',
+      ReaderModal: 'modal',
       NotFound: '*',
     },
   },

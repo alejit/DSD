@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Image } from "react-native";
+import { Swipeable } from "react-native-gesture-handler";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
+import { ActivityRightActions } from "./SwipeUtils";
 
 export default function ActivityScreen({
   navigation,
@@ -16,7 +18,7 @@ export default function ActivityScreen({
     },
   };
   const [Data, setData] = useState([]);
-  const API = "http://192.168.0.101:8080/ords/global_modbd/imprumuta";
+  const API = "http://192.168.100.30:8080/ords/global_modbd/imprumuta";
   const fetchGet = () => {
     fetch(API, get)
       .then((res) => res.json())
@@ -32,23 +34,25 @@ export default function ActivityScreen({
   }, []);
 
   const renderItem = ({ item: imprumut }) => (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        {imprumut.cod_cititor} - {imprumut.cod_carte}
-      </Text>
-      <Text style={styles.subtitle}>
-        Data Imprumut:{imprumut.data_imprumut}
-      </Text>
-      <Text style={styles.subtitle}>
-        Data Restituire:{imprumut.data_restituire}
-      </Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="/screens/BooksScreen.tsx" />
-    </View>
+    <Swipeable renderRightActions={ActivityRightActions}>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          {imprumut.cod_cititor} - {imprumut.cod_carte}
+        </Text>
+        <Text style={styles.subtitle}>
+          Data Imprumut:{imprumut.data_imprumut}
+        </Text>
+        <Text style={styles.subtitle}>
+          Data Restituire:{imprumut.data_restituire}
+        </Text>
+        <View
+          style={styles.separator}
+          lightColor="#eee"
+          darkColor="rgba(255,255,255,0.1)"
+        />
+        {/* <EditScreenInfo path="/screens/BooksScreen.tsx" /> */}
+      </View>
+    </Swipeable>
   );
 
   return (
@@ -69,6 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
+    marginTop: 30,
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   separator: {
-    marginVertical: 30,
+    marginTop: 30,
     height: 1,
     width: "80%",
   },
