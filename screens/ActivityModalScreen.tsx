@@ -15,6 +15,7 @@ export default class ActivityModalScreen extends Component {
 
   constructor(props: any) {
     super(props);
+
     this.state = {
       cod_cititor: "test",
       cod_carte: "test",
@@ -42,12 +43,9 @@ export default class ActivityModalScreen extends Component {
     };
     fetch(api, requestOptions)
       .then((response) => {
-        // console.log(api);
-        // console.log(requestOptions);
-        // console.log(response);
         return response;
       })
-      // .then((data) => this.setState({ cod_cititor: data.cod_cititor }))
+      .then((data) => this.setState({ cod_cititor: "" }))
       .catch((error) => {
         console.error(error);
         console.log("Error return");
