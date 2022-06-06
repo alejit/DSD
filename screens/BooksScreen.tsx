@@ -18,7 +18,7 @@ export default function BooksScreen({
     },
   };
   const [Data, setData] = useState([]);
-  const API = "http://192.168.100.30:8080/ords/global_modbd/carte";
+  const API = "http://192.168.100.30:8080/ords/oltpmodbd/carte";
   const fetchGet = () => {
     fetch(API, header)
       .then((res) => res.json())

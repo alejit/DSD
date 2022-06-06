@@ -18,7 +18,7 @@ export default function ReadersScreen({
     },
   };
   const [Data, setData] = useState([]);
-  const API = "http://192.168.100.30:8080/ords/global_modbd/cititor";
+  const API = "http://192.168.100.30:8080/ords/oltpmodbd/cititor";
   const fetchGet = () => {
     fetch(API, get)
       .then((res) => res.json())

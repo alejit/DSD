@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Image } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import { ActivityRightActions } from "./SwipeUtils";
@@ -18,7 +17,7 @@ export default function ActivityScreen({
     },
   };
   const [Data, setData] = useState([]);
-  const API = "http://192.168.100.30:8080/ords/global_modbd/imprumuta";
+  const API = "http://192.168.100.30:8080/ords/oltpmodbd/imprumuta";
   const fetchGet = () => {
     fetch(API, get)
       .then((res) => res.json())
@@ -50,7 +49,6 @@ export default function ActivityScreen({
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
-        {/* <EditScreenInfo path="/screens/BooksScreen.tsx" /> */}
       </View>
     </Swipeable>
   );
